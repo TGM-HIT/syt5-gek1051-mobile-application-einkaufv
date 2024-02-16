@@ -1,4 +1,4 @@
-# Shoppingliste
+# **E**in**K**auf**V**
 
 ## Intro
 Bei dieser Übung sollen mögliche Synchronisationsmechanismen für mobile Applikationen zur Anwendung kommen.
