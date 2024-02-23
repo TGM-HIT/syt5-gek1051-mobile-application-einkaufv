@@ -2,7 +2,18 @@
 
 ## Mitarbeit im Team
 
-### Allgemeines & Branches
+## Allgemeines
+
+Ganz wichtig: bitte für dieses Repository die Git-Config richtig setzen! Das heißt, dass ihr euren Namen und eure E-Mail-Adresse richtig setzt. Das geht mit folgenden Befehlen:
+
+```sh
+git config --local user.name "Vorname Nachname"
+git config --local user.email "github-email"
+```
+
+Statt `--local` könnt ihr auch `--global` verwenden, wenn ihr das für alle eure Repositories setzen wollt. Mit `github-email` ist jene E-Mail-Adresse gemeint, die ihr als primäre E-Mail-Adresse auf GitHub verwendet.
+
+### Branches
 
 Wir arbeiten hier alle gemeinsam im selben Repository, daher ist es gescheiter, in unterschiedlichen Branches zu arbeiten. Der `main`-Branch ist für direkte Commits gesperrt und ist nur für *funktionierende* Versionen des Projekts gedacht (*what is on the main branch works*). Für die Bennenung der Branches wäre folgendes Muster angebracht:
 
