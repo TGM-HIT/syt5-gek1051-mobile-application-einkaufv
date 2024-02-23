@@ -11,9 +11,19 @@
 
 | ID   | Description                                                  | SP   | HEAD | Prio | Status |
 | ---- | ------------------------------------------------------------ | ---- | ---- | ---- | ------ |
-| 7    | Als Benutzer will ich zu Artikeln Label hinzufügen und wieder löschen können, wie zum Beispiel "Tierfutter", "Trinken", dies hilft bei der Organisation | 1    | STAP | N2H  | [Status](https://github.com/TGM-HIT/syt5-gek1051-mobile-application-listsrdpliste/issues/6#issue-1618697685)     |
-| 11   | Als Benutzer will ich eine Einkaufsliste teilen können, mittels eines Codes den ich an den Bekannten schicke, dieser hat dann genau den gleichen Nutzen mit dieser Liste wie ich. | 5    | SCHD | MH   | [Status](https://github.com/TGM-HIT/syt5-gek1051-mobile-application-listsrdpliste/issues/11#issue-1620432155)    |
-| 12   | Als ein Benutzer will ich zusätzlich zu einem Artikel eine Notiz hinterlegen können, um eventuell unvorhersehbare Informationen mitzuliefern. | 1    | STAP | SH   | [Status](https://github.com/TGM-HIT/syt5-gek1051-mobile-application-listsrdpliste/issues/12#issue-1620433363)    |
+| 1    | Als Benutzer will ich zu Artikeln passende Bilder hinzufügen können, die andere User auch sehen, damit genau die Ausführung des Artikels den ich will gekauft wird | 8    | - | MH  | [Status]()     |
+| 2   | Als Benutzer will ich Push-Benachrichtgungen zu Zeiten die ich mir selber setze, für einzelne Listen bekommen, damit ich keinen Einkauf mehr vergessen | 8    | - | MH   | [Status]()    |
+| 3   | Als ein Benutzer will ich zusätzlich einstellen können ob nur ich oder alle diese Benachrichtigung erhalte/n. | 2    | - | N2H   | [Status]()    |
+| 4   | Als ein Benutzer will ich einzelnen Personen einzelne Artikel zuschreiben können. | 2    | - | SH   | [Status]()    |
+| 5   | Als ein Benutzer will ich eine Suchfunktion haben, welche genauer ist und eine Karte, welche mir die Standorte der Lokationen visualisiert | 8    | - | MH   | [Status]()    |
+| 6   | Als ein Bentzer möchte ich Artikel mit einer Anzahl versehen können | 1    | - | SH   | [Status]()    |
+| 7   | Als ein Benutzer möchte ich der Übersichtlichkeithalber den Listen Farben zuweisen können | 1    | - | N2H   | [Status]()    |
+|  8  | Als Benutzer möchte ich eine Suchfunktionen haben, mit der ich alle Listen nach Artikeln durchsuchen kann | 3    | - | SH   | [Status]()    |
+| 9   | Als Benutzer möchte ich Listen priorisieren können, sodass sie nach Priorität sortiert werden | 2    | - | N2H   | [Status]()    |
+| 10   | Konsistenzprotokoll(?) | 8    | - | MH   | [Status]()    |
+| 11   | Als Benutzer möchte die Möglichkeit haben Listen in einen Papierkorb zu verschieben und sie ggf. von dort auch wiederherzustellen  | 3    | - | SH   | [Status]()    |
+| 12   | Als Benutzer möchte ich die Möglichkeit haben für jede Liste ein passendes Icon zu wählen | 2    | - | N2H   | [Status]()    |
+
 
 ## Zusammenfassung
 
