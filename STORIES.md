@@ -11,19 +11,18 @@
 
 | ID   | Description                                                  | SP   | HEAD | Prio | Status |
 | ---- | ------------------------------------------------------------ | ---- | ---- | ---- | ------ |
-| 1    | Als Benutzer will ich zu Artikeln passende Bilder hinzufügen können, die andere User auch sehen, damit genau die Ausführung des Artikels gekauft wird | 2    | - | N2H  | [Status]()     |
-| 2   | Als Benutzer will ich festlesgen können wer für eine Liste verantwortlich ist | 2    | - | N2H   | [Status]()    |
-| 3   | Als ein Benutzer will ich einzelnen Personen einzelne Artikel zuschreiben können. | 2    | - | SH   | [Status]()    |
-| 4   | Als ein Benutzer will ich eine Suchfunktion haben, welche genauer ist und eine Karte, welche mir die Standorte der Lokationen visualisiert | 3    | - | SH   | [Status]()    |
-| 5   | Als ein Benutzer möchte ich Artikel mit einer Anzahl versehen können | 1    | - | SH   | [Status]()    |
-| 6   | Als ein Benutzer möchte ich der Übersichtlichkeithalber den Listen Farben zuweisen können | 1    | - | N2H   | [Status]()    |
-| 7  | Als Benutzer möchte ich eine Suchfunktionen haben, mit der ich alle Listen nach Artikeln durchsuchen kann | 4   | - | MH   | [Status]()    |
-| 8   | Als Benutzer möchte ich die Listen für bessere Übersicht benutzerdefiniert positionieren können | 4    | - | MH   | [Status]()    |
-| 9   | Als Benutzer möchte ich meine Einkaufsliste im Offline-Modus auch funktioniert und aktuell bleibt.  | 4    | - | MH   | [Status]()    |
-| 10   | Als Benutzer möchte die Möglichkeit haben Listen für sich selber auszublenden  | 4    | - | MH   | [Status]()    |
-| 11   | Als Benutzer möchte ich die Möglichkeit haben für jede Liste ein passendes Icon zu wählen | 2    | - | N2H   | [Status]()    |
-| 12   | Als Benutzer möchte ich die Möglichkeit haben Artikel mit Tags zu versehen. | 3    | - | SH   | [Status]()    |
-
+| 1    | Als Benutzer möchte ich eine Suchfunktionen haben, mit der ich alle Listen nach Artikeln durchsuchen kann | 4   | - | MH   | [Status]()    |
+| 2    | Als Benutzer möchte ich die Listen für bessere Übersicht benutzerdefiniert positionieren können | 4    | - | MH   | [Status]()    |
+| 3    | Als Benutzer möchte ich meine Einkaufsliste im Offline-Modus auch funktioniert und aktuell bleibt.  | 4    | - | MH   | [Status]()    |
+| 4    | Als Benutzer möchte die Möglichkeit haben Listen für sich selber auszublenden  | 4    | - | MH   | [Status]()    |
+| 5    | Als ein Benutzer will ich einzelnen Personen einzelne Artikel zuschreiben können. | 2    | - | SH   | [Status]()    |
+| 6    | Als ein Benutzer will ich eine Suchfunktion haben, welche genauer ist und eine Karte, welche mir die Standorte der Lokationen visualisiert | 3    | - | SH   | [Status]()    |
+| 7    | Als ein Benutzer möchte ich Artikel mit einer Anzahl versehen können | 1    | - | SH   | [Status]()    |
+| 8    | Als Benutzer möchte ich die Möglichkeit haben Artikel mit Tags zu versehen. | 3    | - | SH   | [Status]()    |
+| 9    | Als Benutzer will ich zu Artikeln passende Bilder hinzufügen können, die andere User auch sehen, damit genau die Ausführung des Artikels gekauft wird | 2    | - | N2H  | [Status]()     |
+| 10   | Als Benutzer will ich festlesgen können wer für eine Liste verantwortlich ist | 2    | - | N2H   | [Status]()    |
+| 11   | Als ein Benutzer möchte ich der Übersichtlichkeithalber den Listen Farben zuweisen können | 1    | - | N2H   | [Status]()    |
+| 12   | Als Benutzer möchte ich die Möglichkeit haben für jede Liste ein passendes Icon zu wählen | 2    | - | N2H   | [Status]()    |
 
 ## Zusammenfassung
 
