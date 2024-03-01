@@ -15,10 +15,10 @@ Statt `--local` könnt ihr auch `--global` verwenden, wenn ihr das für alle eur
 
 ### Setup
 
-Repository klonen (vorerst das originale Repo):
+Repository klonen:
 
 ```sh
-$ git clone https://github.com/ibm-watson-data-lab/shopping-list-vuejs-pouchdb
+$ git clone https://github.com/TGM-HIT/syt5-gek1051-mobile-application-einkaufv.git
 ```
 
 Installieren der Dependencies (Hinweis, dies wird über 100 Warnungen aufgrund von Sicherheitslücken ausgeben, da die Dependencies nicht aktuell sind; siehe auch [Fazit](#fazit)):
