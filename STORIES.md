@@ -26,5 +26,5 @@
 
 ## Zusammenfassung
 
-*Bitte hier die einzelnen Gruppenmitgliedern, mit deren Gesamtbelastung (SPs) auflisten!*
+2 Einheiten * 2 Wochen * 4 Teammitglieder = 16 Storypoints
 
