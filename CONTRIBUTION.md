@@ -35,7 +35,3 @@ Hier finden sich gute Beispiele für Commit-Messages: [https://wiki.openstack.or
 Ein guter Style für Commit-Messages wäre es, die erste Zeile jeweils mit einem Verb im Imperativ zu beginnen (z.B. "Add", "Fix", "Change", "Remove", "Refactor", etc.) und dann eine kurze Beschreibung des Commits zu geben. Da die erste Zeile auf 72 Zeichen beschränkt sein sollte, können noch zusätzliche Informationen in den folgenden Zeilen hinzugefügt werden (mit einer Leerzeile dazwischen, siehe Beispiele aus dem Link oben).
 
 Als Referenz können auch die bisherigen Commits herangezogen werden.
-
-## Aufsetzen als lokale Applikation
-
-TODO
