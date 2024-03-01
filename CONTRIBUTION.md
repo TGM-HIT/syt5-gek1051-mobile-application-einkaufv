@@ -2,7 +2,7 @@
 
 ## Mitarbeit im Team
 
-## Allgemeines
+### Allgemeines
 
 Ganz wichtig: bitte für dieses Repository die Git-Config richtig setzen! Das heißt, dass ihr euren Namen und eure E-Mail-Adresse richtig setzt. Das geht mit folgenden Befehlen:
 
@@ -12,6 +12,26 @@ git config --local user.email "github-email"
 ```
 
 Statt `--local` könnt ihr auch `--global` verwenden, wenn ihr das für alle eure Repositories setzen wollt. Mit `github-email` ist jene E-Mail-Adresse gemeint, die ihr als primäre E-Mail-Adresse auf GitHub verwendet.
+
+### Setup
+
+Repository klonen (vorerst das originale Repo):
+
+```sh
+$ git clone https://github.com/ibm-watson-data-lab/shopping-list-vuejs-pouchdb
+```
+
+Installieren der Dependencies (Hinweis, dies wird über 100 Warnungen aufgrund von Sicherheitslücken ausgeben, da die Dependencies nicht aktuell sind; siehe auch [Fazit](#fazit)):
+
+```sh
+$ npm install
+```
+
+Starten als lokale Applikation:
+
+```sh
+$ npm start
+```
 
 ### Branches
 
