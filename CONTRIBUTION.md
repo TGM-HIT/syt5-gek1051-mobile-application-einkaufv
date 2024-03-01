@@ -48,10 +48,12 @@ Aufgrund der Tatsache, dass dies nur ein kleines Projekt ist, möchten wir zwar 
 
 ### Commit Messages
 
-Die Commit-Messages machen wir am besten in der selben Sprache und bleiben auch in der selben Sprache (am besten wäre natürlich Englisch).
-
-Hier finden sich gute Beispiele für Commit-Messages: [https://wiki.openstack.org/wiki/GitCommitMessages#Examples_of_good_practice](https://wiki.openstack.org/wiki/GitCommitMessages#Examples_of_good_practice)
+Die Commit-Messages machen wir am besten in der selben Sprache und bleiben auch in der selben Sprache (am besten wäre natürlich Englisch). Es gibt gute Websiten, die Beispiele für gute Commit-Messages liefern [1].
 
 Ein guter Style für Commit-Messages wäre es, die erste Zeile jeweils mit einem Verb im Imperativ zu beginnen (z.B. "Add", "Fix", "Change", "Remove", "Refactor", etc.) und dann eine kurze Beschreibung des Commits zu geben. Da die erste Zeile auf 72 Zeichen beschränkt sein sollte, können noch zusätzliche Informationen in den folgenden Zeilen hinzugefügt werden (mit einer Leerzeile dazwischen, siehe Beispiele aus dem Link oben).
 
 Als Referenz können auch die bisherigen Commits herangezogen werden.
+
+## Quellen
+
+[1] “Gitcommitmessages,” OpenStack, https://wiki.openstack.org/wiki/GitCommitMessages#Examples_of_good_practice (accessed Mar. 1, 2024).
