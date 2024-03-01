@@ -15,7 +15,3 @@ Ein weiteres, wichtiges Ziel ist es, die persönliche Umsetzung einer mobilen Ap
 ## What
 
 ## Why
-
-## Storypoints
-
-2 Arbeitspakete * 6 Wochen * 4 Teammitglieder = **48 Storypoints**
