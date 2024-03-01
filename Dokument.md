@@ -32,7 +32,122 @@ $ npm start
 
 ### Schnittstellen-Beschreibung
 
-TODO
+#### PouchDB
+
+PouchDB: PouchDB-API-Aufrufe, die zum Speichern, Abfragen, Aktualisieren und Löschen von Daten in der lokalen Datenbank verwendet werden.
+Beispiele:
+
+- Erstellen der PouchDB`var db = new PouchDB('shopping');`
+- die CRUD-Operationen `return db.find(q);`
+
+#### AJAX
+
+AJAX wird verwendet, um die Verwendung einer HTTP-Anfrage für die OpenStreetMap Daten zur Verfügung zu stellen.
+
+```
+/\*\*
+_ Called when the Lookup button is pressed. We make an API call to
+_ OpenStreetMap passing in the user-supplied name of the place. If
+_ the API returns something, the options are added to Vue's "places"
+_ array and become a pull-down list of options on the front end.
+\*/
+onClickLookup: function() {
+
+      // make request to the OpenStreetMap API
+      var url = 'https://nominatim.openstreetmap.org/search';
+      var qs = {
+        format: 'json',
+        addressdetails: 1,
+        namedetails: 1,
+        q: this.singleList.place.title
+      };
+      ajax(url, qs).then((d) => {
+
+        // add the list of places to our list
+        this.places = d;
+
+        // if there is only one item in the list
+        if (d.length ==1) {
+          // simulate selection of first and only item
+          this.onChangePlace(d[0].place_id);
+        }
+      });
+
+    },
+```
+
+#### Vue Material
+
+Vue Material wird für die Gestaltung der Benutzeroberfläche von Vue verwendet.
+
+```
+// Vue Material plugin
+Vue.use(VueMaterial);
+
+// Vue Material theme
+Vue.material.registerTheme('default', {
+primary: 'blue',
+accent: 'white',
+warn: 'red',
+background: 'grey'
+});
+```
+
+#### Vue.js
+
+Vue.js wird als reaktive Benutzeroberfläche verwendet, die automatisch aktualisiert wird, wenn sich zugrunde liegende Daten ändern.
+
+- mit der Datenbank:
+
+```
+    var app = new Vue({
+  el: '#app',
+  data: {
+    mode: 'showlist',
+    pagetitle: 'Shopping Lists',
+    shoppingLists: [],
+    shoppingListItems: [],
+    singleList: null,
+    currentListId: null,
+    newItemTitle:'',
+    places: [],
+    selectedPlace: null,
+    syncURL:'',
+    syncStatus: 'notsyncing'
+  },
+```
+
+- Methoden:
+
+```
+methods: {
+  onClickSettings: function() { ... },
+  saveLocalDoc: function(doc) { ... },
+    //.....
+```
+
+#### Cloudant
+
+Cloudant ist ein Cloud-basierter Datenbankdienst, der für die Synchronisierung der Daten vorhanden in PouchDB vorhanden, verwendet wird.
+
+PouchDB to Cloudant two-way sync:
+
+```
+/**
+     * Called when save button on the settings panel is clicked. The
+     * Cloudant sync URL is saved in PouchDB and the sync process starts.
+     */
+    onClickStartSync: function() {
+      var obj = {
+        '_id': '_local/user',
+        'syncURL': this.syncURL
+      };
+      this.saveLocalDoc(obj).then( () => {
+        this.startSync();
+      });
+    },
+```
+
 
 ## Neuentwicklung von Grund auf
 
