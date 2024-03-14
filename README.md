@@ -1,5 +1,7 @@
 # **E**in**K**auf**V**
 
+Link zur Applikation: [einkaufv.netlify.app/](https://einkaufv.netlify.app/)
+
 ## Intro
 Bei dieser Übung sollen mögliche Synchronisationsmechanismen für mobile Applikationen zur Anwendung kommen.
 
