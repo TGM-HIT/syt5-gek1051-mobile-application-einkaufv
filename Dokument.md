@@ -160,9 +160,6 @@ PouchDB to Cloudant two-way sync:
     },
 ```
 
+### Deployment
 
-## Neuentwicklung von Grund auf
-
-Beim Installieren der Dependencies fällt auf, dass die Dependencies nicht aktuell sind und über 100 Warnungen aufgrund von Sicherheitslücken ausgeben. Daher wäre eine Alternative, die Applikation von Grund auf neu zu entwickeln. Da die Applikation sowieso das *Offline-First*-Prinzip implementieren soll, bleiben nicht viele Datenbanken übrig, außer z.B. [RxDB](https://rxdb.info/), welche ebenfalls für JavaScript-Applikationen geschrieben worden ist. Als Frontend kann weiterhin Vue.js verwendet werden, da die größten Frameworks (React, Angular, Vue) sich wenig voneinander abheben.
-
-## <a name="fazit"></a>Fazit
+Die Applikation wird mittels [Netlify](https://www.netlify.com/) gehostet (Link zur Applikation). Dies ist ein Cloud-Service, welcher das statische Hosten von Webseiten ermöglicht. Des Weiteren ist der `main`-Branch mit dem Netlify-Service verbunden, sodass bei jedem Push auf den `main`-Branch die Applikation automatisch aktualisiert wird. Für das Deployment wird auch keine `netlify.toml` als Konfiguration genutzt. Zum jetzigen Zeitpunkt ist die dahinterliegende CouchDB-Datenbank noch nicht in der Cloud gehostet. 
