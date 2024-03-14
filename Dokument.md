@@ -1,8 +1,20 @@
 # Dokumentation der verwendeten Technologien
 
-## Bestehende Applikation
+## Entscheidung
 
-Für dieses Projekt steht eine bestehende Applikation als Vorlage zur Verfügung. Diese kombiniert das JS-Framework Vue.js als Frontend mit PouchDB als in-browser Datenbank. Diese App steht unter [https://github.com/mborko/shopping-list](https://github.com/mborko/shopping-list) zur Verfügung.
+### Vue.js und PouchDB
+
+Für dieses Projekt steht eine bestehende Applikation als Vorlage zur Verfügung. Diese kombiniert das JS-Framework Vue.js als Frontend mit PouchDB als in-browser Datenbank. Diese App steht unter [https://github.com/mborko/shopping-list](https://github.com/mborko/shopping-list) zur Verfügung. Die App ist zwar bereits voll funktionstüchtig, jedoch gibt es einige Sicherheitslücken in den Dependencies, da die letzten Commits schon ganze 7 Jahre (!)zurückliegen. Des Weiteren sind die Versionen der verwendeten Frameworks so alt, dass sie nicht mehr mit den heutigen Implementierungen vergleichbar sind, weshalb aktuelle Dokumentationen und Tutorials nicht direkt anwendbar sind (Stichwort Vue.js).
+
+### Neuentwicklung von Grund auf
+
+Beim Installieren der Dependencies fällt auf, dass die Dependencies nicht aktuell sind und über 100 Warnungen aufgrund von Sicherheitslücken ausgeben. Daher wäre eine Alternative, die Applikation von Grund auf neu zu entwickeln. Da die Applikation sowieso das *Offline-First*-Prinzip implementieren soll, bleiben nicht viele Datenbanken übrig, außer z.B. [RxDB](https://rxdb.info/), welche ebenfalls für JavaScript-Applikationen geschrieben worden ist. Als Frontend kann weiterhin Vue.js verwendet werden, da die größten Frameworks (React, Angular, Vue) sich wenig voneinander abheben.
+
+### <a name="fazit"></a>Fazit
+
+Aufgrund des beschränkten Zeitrahmens von nur 6 Wochen ist es für uns nicht sinnvoll, die Shoppingliste von Grund auf neu zu programmieren. Wir werden mit den bestehenden Technologien arbeiten und die Sicherheitslücken in den Dependencies ignorieren.
+
+## Beschreibung der Applikation
 
 ### Setup
 
@@ -12,7 +24,7 @@ Repository klonen:
 $ git clone https://github.com/ibm-watson-data-lab/shopping-list-vuejs-pouchdb
 ```
 
-Installieren der Dependencies (Hinweis, dies wird über 100 Warnungen aufgrund von Sicherheitslücken ausgeben, da die Dependencies nicht aktuell sind; siehe auch [Fazit](#fazit)):
+Installieren der Dependencies (Hinweis, dies wird über 100 Warnungen aufgrund von Sicherheitslücken ausgeben, da die Dependencies nicht aktuell sind):
 
 ```sh
 $ npm install
