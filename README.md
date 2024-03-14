@@ -7,7 +7,7 @@ Bei dieser Übung sollen mögliche Synchronisationsmechanismen für mobile Appli
 - [@timorisser](https://github.com/timorisser) - Product Owner
 - [@asuender](https://github.com/asuender) - Technical Architect
 - [@bbogenreiter](https://github.com/bbogenreiter) - A-Meise
-- [@Aleksa-Marinkovic](https://github.com/Aleksa-Marinkovic)@ - B-Meise
+- [@Aleksa-Marinkovic](https://github.com/Aleksa-Marinkovic) - B-Meise
 
 ## What
 Unser Projekt ist eine mobile Einkaufslisten-App, die es Benutzern ermöglicht, Einkaufslisten zu erstellen und Artikel hinzuzufügen. Die App bietet auch die Möglichkeit zur Zusammenarbeit, so dass mehrere Benutzer gleichzeitig an einer Liste arbeiten können und das auchh mit Konsistenzprotokoll (also offline first).
