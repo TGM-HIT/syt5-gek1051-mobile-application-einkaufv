@@ -5,6 +5,7 @@ services:
     container_name: einkaufv-couchdb
     ports:
       - 5984:5984
+      - 6984:6984
     volumes:
       - ./data:/opt/couchdb/data
     environment:
