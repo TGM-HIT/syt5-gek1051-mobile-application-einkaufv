@@ -1,6 +1,7 @@
 # **E**in**K**auf**V**
 
-Link zur Applikation: [einkaufv.netlify.app/](https://einkaufv.netlify.app/)
+- Link zur Applikation: [einkaufv.netlify.app/](https://einkaufv.netlify.app/)
+- Link zur Technischen Dokumentation: [https://www.overleaf.com/read/zydzbsbtnqxz#c50c0f](https://www.overleaf.com/read/zydzbsbtnqxz#c50c0f)
 
 ## Intro
 
