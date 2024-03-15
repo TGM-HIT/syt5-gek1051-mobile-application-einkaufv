@@ -441,6 +441,16 @@ var app = new Vue({
       });
     },
 
+    /**
+     * Called when the blend-out button is pressed next to a shopping list.
+     * The shopping list document is located, hidden from Vue's shoppingLists array.
+     * @param {String} id
+     */
+    onClickBlendOut: function(id) {
+      var match = this.findDoc(this.shoppingLists, id);
+      this.shoppingLists.splice(match.i, 1);
+    },
+
     // the user wants to see the contents of a shopping list
     // we load it and switch views
     /**
