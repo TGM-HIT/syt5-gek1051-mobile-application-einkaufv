@@ -105,7 +105,7 @@ var app = new Vue({
     newItemTitle:'',
     places: [],
     selectedPlace: null,
-    syncURL:'',
+    syncURL:'20.53.97.46',
     syncStatus: 'notsyncing'
   },
   // computed functions return data derived from the core data.
