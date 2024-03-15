@@ -6,7 +6,7 @@
   "private": true,
   "scripts": {
     "test": "karma start --single-run --browsers ChromeHeadless karma.conf.js",
-    "start": "node --env-file=.env app.js"
+    "start": "node app.js"
   },
   "repository": {
     "type": "git",
