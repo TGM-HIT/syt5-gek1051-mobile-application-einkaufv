@@ -19,6 +19,7 @@ Repository klonen:
 
 ```sh
 $ git clone https://github.com/TGM-HIT/syt5-gek1051-mobile-application-einkaufv.git
+cd app
 ```
 
 Installieren der Dependencies (Hinweis, dies wird über 100 Warnungen aufgrund von Sicherheitslücken ausgeben, da die Dependencies nicht aktuell sind; siehe auch [Fazit](#fazit)):
@@ -27,10 +28,19 @@ Installieren der Dependencies (Hinweis, dies wird über 100 Warnungen aufgrund v
 $ npm install
 ```
 
+Optional: wenn ihr die lokale Applikation mit der CouchDB-Instanz synchronisieren wollt, dann müsst ihr eine `.env`-Datei im `app`-Ordner erstellen und dort die folgenden Umgebungsvariablen setzen:
+
+```sh
+COUCHDB_URL=...
+```
+
+Hier statt `...` die URL zur CouchDB-Instanz eintragen.
+
 Starten als lokale Applikation:
 
 ```sh
-$ npm start
+$ npm start                 # ohne Online-Synchronisierung
+$ npm start --env-file=.env  # mit Online-Synchronisierung
 ```
 
 ### Branches
