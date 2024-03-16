@@ -46,6 +46,10 @@
           <md-icon>check</md-icon>
         </md-button>
 
+        <!-- blend-in -->
+        <md-button class="md-icon-button" v-if="mode == 'showlist'" v-on:click="onClickBlendIn()">
+          <md-icon>visibility_on</md-icon>
+        </md-button>
         <!-- settings -->
         <md-button class="md-icon-button" v-if="mode == 'showlist'" v-on:click="onClickSettings">
           <md-icon>settings</md-icon>
