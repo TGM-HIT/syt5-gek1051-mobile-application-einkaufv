@@ -151,6 +151,11 @@
             <md-input v-model="newItemTitle" placeholder="New item e.g. eggs" @keyup.enter.native="onAddListItem"></md-input>
           </md-input-container>
 
+          <!-- shopping item quantity -->
+          <md-input-container>
+            <md-input type="number" v-model="newItemQuantity" placeholder="Quantity" min="1"></md-input>
+          </md-input-container>
+
           <!-- shopping item add button -->
           <md-button class="md-icon-button md-list-action" v-on:click="onAddListItem" v-bind:disabled="newItemTitle.length == 0">
             <md-icon class="md-primary">add_shopping_cart</md-icon>
