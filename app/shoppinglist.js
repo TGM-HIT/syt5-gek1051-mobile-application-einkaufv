@@ -464,18 +464,39 @@ var app = new Vue({
     },
 
     /**
-     * Called when the blend-in button is pressed next to a shopping list.
-     * All locally hidden shopping lists are shown again.
-     * @param {String} id
+     * Called when the blend-in button is pressed.
+     * All locally hidden shopping lists are removed from blendedOutIds-localStorage and shown again.
      */
     onClickBlendIn: function() {
       // Clear the blendedOutIds from localStorage
       localStorage.setItem('blendedOutIds', JSON.stringify([]));
 
       // Show all lists on reload
-      this.fetchAllItems();
+      this.reloadLists();
     },
 
+    /**
+     * Updates the Vue model with the all items in the database
+     */
+    reloadLists: function() {
+      // Fetch lists
+      db.find({
+        selector: { 
+          type: 'list' 
+        }
+      }).then((data) => {
+        this.shoppingLists = data.docs;
+        // Fetch list items
+        return db.find({ 
+          selector: { 
+            type: 'item' 
+          } 
+        });
+      }).then((data) => {
+        this.shoppingListItems = data.docs;
+      }).catch((e) => {})
+    },
+    
     // the user wants to see the contents of a shopping list
     // we load it and switch views
     /**
