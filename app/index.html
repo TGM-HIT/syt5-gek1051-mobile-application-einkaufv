@@ -153,7 +153,7 @@
 
           <!-- shopping item quantity -->
           <md-input-container>
-            <md-input type="number" v-model="newItemQuantity" placeholder="Quantity" min="1"></md-input>
+            <md-input type="number" v-model="newItemQuantity" placeholder="Quantity (1 or higher)" min="1"></md-input>
           </md-input-container>
 
           <!-- shopping item add button -->
@@ -170,9 +170,9 @@
             <md-checkbox v-model="item.checked" class="md-primary" v-on:change="onCheckListItem(item._id)"></md-checkbox>
           </div>
 
-          <!-- shopping list item title -->
+          <!-- item title and quantity -->
           <div class="md-list-text-container">
-            <span v-bind:class="{ cardchecked: item.checked}">{{ item.title }}</span>
+            <span v-bind:class="{ cardchecked: item.checked }">{{ item.title }} - Quantity: {{ item.quantity }}</span>
           </div>
 
           <!-- shopping list item delete button -->
