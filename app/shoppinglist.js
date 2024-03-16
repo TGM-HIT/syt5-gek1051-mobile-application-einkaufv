@@ -168,8 +168,14 @@ var app = new Vue({
       return db.find(q);
     }).then((data) => {
 
-      // write the data to the Vue model, and from there the web page
-      app.shoppingLists = data.docs;
+      // Get the blended out ids from localStorage
+      var blendedOutIds = JSON.parse(localStorage.getItem('blendedOutIds')) || [];
+
+      // Filter out the items with ids that are in the blendedOutIds array
+      var filteredItems = data.docs.filter(item => !blendedOutIds.includes(item._id));
+
+      // write the filtered data to the Vue model, and from there the web page
+      app.shoppingLists = filteredItems;
 
       // get all of the shopping list items
       var q = {
@@ -443,12 +449,31 @@ var app = new Vue({
 
     /**
      * Called when the blend-out button is pressed next to a shopping list.
-     * The shopping list document is located, hidden from Vue's shoppingLists array.
+     * The shopping list document is located, hidden for the local user.
      * @param {String} id
      */
     onClickBlendOut: function(id) {
       var match = this.findDoc(this.shoppingLists, id);
       this.shoppingLists.splice(match.i, 1);
+
+      var blendedOutIds = JSON.parse(localStorage.getItem('blendedOutIds')) || [];
+      if (!blendedOutIds.includes(id)) {
+        blendedOutIds.push(id);
+        localStorage.setItem('blendedOutIds', JSON.stringify(blendedOutIds));
+      }
+    },
+
+    /**
+     * Called when the blend-in button is pressed next to a shopping list.
+     * All locally hidden shopping lists are shown again.
+     * @param {String} id
+     */
+    onClickBlendIn: function() {
+      // Clear the blendedOutIds from localStorage
+      localStorage.setItem('blendedOutIds', JSON.stringify([]));
+
+      // Show all lists on reload
+      this.fetchAllItems();
     },
 
     // the user wants to see the contents of a shopping list
