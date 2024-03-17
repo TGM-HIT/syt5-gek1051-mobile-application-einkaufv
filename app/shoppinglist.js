@@ -382,7 +382,6 @@ var app = new Vue({
       this.singleList._id = 'list:' + cuid();
       this.singleList.createdAt = new Date().toISOString();
       this.pagetitle = 'New Shopping List';
-      this.colour = '#FFFFFF';
       this.places = [];
       this.selectedPlace = null;
       this.mode='addlist';
