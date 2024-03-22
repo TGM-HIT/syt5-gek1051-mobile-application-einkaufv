@@ -41,6 +41,11 @@
         <!-- page title -->
         <h2 class="md-title" style="flex: 1">{{ pagetitle }}</h2>
         
+        <!-- visualisation of sync status -->
+        <md-chip v-if="syncStatus == 'notsyncing'">Not Syncing</md-chip>
+        <md-chip v-if="syncStatus == 'syncing'" class="md-primary">Syncing</md-chip>
+        <md-chip v-if="syncStatus == 'syncerror'" class="md-warn">Sync Error</md-chip>
+
         <!-- save new shopping list button -->
         <md-button class="md-icon-button" v-if="mode == 'addlist'" v-on:click="onClickSaveShoppingList" v-bind:disabled="singleList.title.length == 0">
           <md-icon>check</md-icon>
@@ -154,7 +159,7 @@
         </md-list-item>
 
         <!-- shopping list items -->
-        <md-list-item v-for="item in sortedShoppingListItems" :key="item._id" v-if="item.list == currentListId">
+        <md-list-item v-for="(item, index) in sortedShoppingListItems" :key="item._id" v-if="item.list == currentListId">
 
           <!-- checkbox against each item -->
           <div>
@@ -171,13 +176,14 @@
             <md-icon>cancel</md-icon>
           </md-button>
 
+
           <md-divider></md-divider>
         </md-list-item>
       </md-list> <!-- shopping list item editor -->
 
       <!-- list of shopping lists -->
       <md-list v-if="mode == 'showlist'">
-        <md-card v-for="list in sortedShoppingLists" :key="list._id" :data-id="list._id">     
+        <md-card v-for="(list, index) in shoppingLists" :key="list._id" :data-id="list._id">     
           <md-card-header>
             <!-- shopping list title -->
             <div class="md-title" v-bind:class="{ cardchecked: list.checked}">{{ list.title }}</div>
@@ -215,6 +221,18 @@
             <!-- button to edit the list items -->
             <md-button v-on:click="onClickList(list._id, list.title)">
                 <md-icon>chevron_right</md-icon>
+            </md-button>
+          </md-card-actions>
+
+          <md-card-actions>
+            <md-button v-on:click="moveUp(index)">
+                Up
+            </md-button>
+          </md-card-actions>
+
+          <md-card-actions>
+            <md-button v-on:click="moveDown(index)">
+                Down
             </md-button>
           </md-card-actions>
         </md-card>
