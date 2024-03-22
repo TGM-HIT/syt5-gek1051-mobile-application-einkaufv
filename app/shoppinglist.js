@@ -105,7 +105,7 @@ var app = new Vue({
     newItemTitle:'',
     places: [],
     selectedPlace: null,
-    syncURL: process.env.COUCHDB_URL,
+    syncURL: '',
     syncStatus: 'notsyncing'
   },
   // computed functions return data derived from the core data.
