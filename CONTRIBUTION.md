@@ -56,6 +56,12 @@ Als Referenz können auch die bisherigen Commits herangezogen werden.
 
 ## Verwendung des Testframeworks
 
+Zuerst müssen die "devDependencies", die im package.json enthalten sind, installiert werden:
+\begin{verbatim}
+    cd syt5-gek1051-mobile-application-einkaufv\app
+    npm install
+\end{verbatim}
+
 In `test/test.js` können beliebige Test-Cases hinzugefügt werden, hier ist ein Beispiel:
 
 ```js
