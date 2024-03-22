@@ -62,7 +62,7 @@ Zuerst müssen die "devDependencies", die im package.json enthalten sind, instal
     npm install
 \end{verbatim}
 
-In `test/test.js` können beliebige Test-Cases hinzugefügt werden, hier ist ein Beispiel:
+In `test/test.js` können beliebige Test-Cases hinzugefügt werden, hier ist ein Beispiel [2]:
 
 ```js
 // Code in main.js
@@ -88,4 +88,5 @@ Mittels des Befehls `npm run test` werden die Tests lokal durchgeführt.
 
 ## Quellen
 
-[1] “Gitcommitmessages,” OpenStack, https://wiki.openstack.org/wiki/GitCommitMessages#Examples_of_good_practice (accessed Mar. 1, 2024).
+- [1] „GitCommitMessages - OpenStack“. OpenStack. [Online](https://wiki.openstack.org/wiki/GitCommitMessages#Examples_of_good_practice) (accessed: Mar. 01, 2024)
+- [2] "Test JavaScript code using Karma, Mocha, Chai and headless browsers". Meziantou's blog. [Online](https://www.meziantou.net/test-javascript-code-using-karma-mocha-chai-and-headless-browsers.htm) (accessed: Mar. 21, 2024)
