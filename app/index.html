@@ -46,6 +46,10 @@
           <md-icon>check</md-icon>
         </md-button>
 
+        <!-- blend-in -->
+        <md-button class="md-icon-button" v-if="mode == 'showlist'" v-on:click="onClickBlendIn()">
+          <md-icon>visibility_on</md-icon>
+        </md-button>
         <!-- settings -->
         <md-button class="md-icon-button" v-if="mode == 'showlist'" v-on:click="onClickSettings">
           <md-icon>settings</md-icon>
@@ -202,6 +206,11 @@
               <!-- delete button -->
               <md-button class="md-fab md-primary md-mini md-clean" v-on:click="onClickDelete(list._id)">
                 <md-icon>delete</md-icon>
+              </md-button>
+
+              <!-- blend-out button -->
+              <md-button class="md-fab md-primary md-mini md-clean" v-on:click="onClickBlendOut(list._id)">
+                <md-icon>visibility_off</md-icon>
               </md-button>
             </md-speed-dial>
           </md-card-header>
