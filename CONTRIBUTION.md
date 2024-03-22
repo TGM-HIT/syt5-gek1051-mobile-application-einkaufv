@@ -54,6 +54,32 @@ Ein guter Style für Commit-Messages wäre es, die erste Zeile jeweils mit einem
 
 Als Referenz können auch die bisherigen Commits herangezogen werden.
 
+## Verwendung des Testframeworks
+
+In `test/test.js` können beliebige Test-Cases hinzugefügt werden, hier ist ein Beispiel:
+
+```js
+// Code in main.js
+function endsWith(str, suffix) {
+    return str.indexOf(suffix, str.length - suffix.length) !== -1;
+}
+
+// Code in test.js
+describe('main', function () {
+    describe('#endsWith()', function () {
+        it('should return true when the value ends with the suffix', function () {
+            assert.equal(true, endsWith("abcd", "cd"));
+        });
+
+        it('should return false when the value does not end with the suffix', function () {
+            assert.equal(false, endsWith("abcd", "cde"));
+        });
+    });
+});
+```
+
+Mittels des Befehls `npm run test` werden die Tests lokal durchgeführt.
+
 ## Quellen
 
 [1] “Gitcommitmessages,” OpenStack, https://wiki.openstack.org/wiki/GitCommitMessages#Examples_of_good_practice (accessed Mar. 1, 2024).
