@@ -31,7 +31,7 @@ body {
 .floatingbutton {
   position: fixed;
   bottom: 5px;
-  right: 5px;
+  left: 20px;
   z-index: 1000;
 }
 
@@ -44,3 +44,32 @@ body {
 .itemedit {
   background-color: white !important
 }
+#search {
+  display: flex;
+  padding: 20px;
+  color: black;
+}
+
+#searchInput {
+  display: inherit;
+  width: 100%;
+  padding: 1em 1em;
+  color: black;
+}
+
+#results {
+  display: block;
+  padding: 10px;
+  color: black;
+}
+
+#results .name {
+  width: 100%;
+  padding: 10px 0;
+  text-align: center;
+  background-color: white;
+  margin-bottom: 10px;
+  list-style-type: none;
+  color: black;
+}
+

@@ -18,9 +18,10 @@
 
   <!-- Material Design styles for Vue.js  -->
   <link rel="stylesheet" href="https://unpkg.com/vue-material@0.7.4/dist/vue-material.css">
-
+  <script src="https://cdn.tailwindcss.com"></script>
   <!-- our styles -->
   <link href="shoppinglist.css" type="text/css" rel="stylesheet" media="screen,projection"/>
+  
 
   <!-- PWA manifest -->
   <link rel="manifest" href="manifest.json">
@@ -40,7 +41,33 @@
         
         <!-- page title -->
         <h2 class="md-title" style="flex: 1">{{ pagetitle }}</h2>
+
+        <!-- search bar -->
+        <div class="search-bar">
+          <input 
+            id="search" 
+            type="search" 
+            placeholder="Start typing to search..." 
+            list="search-suggestions" 
+            autocomplete="off"
+            v-model="searchQuery"
+          />
+          
+          <!-- Verbesserter runder X-Button -->
+          <button @click="clearAndClose" class="clear-search">
+            <span class="x-icon"></span>
+          </button>
+          
+          <datalist id="search-suggestions">
+            <option v-for="item in filteredShoppingListItems" :value="item.title" :key="item._id"></option>
+          </datalist>
+        </div>
         
+        <!-- visualisation of sync status -->
+        <md-chip v-if="syncStatus == 'notsyncing'">Not Syncing</md-chip>
+        <md-chip v-if="syncStatus == 'syncing'" class="md-primary">Syncing</md-chip>
+        <md-chip v-if="syncStatus == 'syncerror'" class="md-warn">Sync Error</md-chip>
+
         <!-- save new shopping list button -->
         <md-button class="md-icon-button" v-if="mode == 'addlist'" v-on:click="onClickSaveShoppingList" v-bind:disabled="singleList.title.length == 0">
           <md-icon>check</md-icon>
