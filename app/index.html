@@ -66,7 +66,7 @@
     <main class="main-content">
 
       <!-- add new shopping list form-->
-      <md-card v-if="mode == 'addlist'">
+      <md-card v-if="mode == 'addlist'" :style="{ backgroundColor: mode == 'addlist' ? 'white' : '' }">
         <md-card-header>Add Shopping List</md-card-header>
         <md-card-content>
           <!-- shopping list name -->
@@ -75,6 +75,12 @@
             <md-input placeholder="e.g. Food" v-model="singleList.title"></md-input>
           </md-input-container>   
           
+          <!-- select list colour -->
+          <label>List colour</label>
+          <md-input-container>
+            <input type="color" v-model="singleList.colour">
+          </md-input-container>
+
           <!-- shopping place name -->
           <md-input-container>
             <label>Place name</label>
@@ -151,6 +157,11 @@
             <md-input v-model="newItemTitle" placeholder="New item e.g. eggs" @keyup.enter.native="onAddListItem"></md-input>
           </md-input-container>
 
+          <!-- shopping item quantity -->
+          <md-input-container>
+            <md-input type="number" v-model="newItemQuantity" placeholder="Quantity (1 or higher)" min="1"></md-input>
+          </md-input-container>
+
           <!-- shopping item add button -->
           <md-button class="md-icon-button md-list-action" v-on:click="onAddListItem" v-bind:disabled="newItemTitle.length == 0">
             <md-icon class="md-primary">add_shopping_cart</md-icon>
@@ -165,9 +176,9 @@
             <md-checkbox v-model="item.checked" class="md-primary" v-on:change="onCheckListItem(item._id)"></md-checkbox>
           </div>
 
-          <!-- shopping list item title -->
+          <!-- item title and quantity -->
           <div class="md-list-text-container">
-            <span v-bind:class="{ cardchecked: item.checked}">{{ item.title }}</span>
+            <span v-bind:class="{ cardchecked: item.checked }">{{ item.title }} - Quantity: {{ item.quantity }}</span>
           </div>
 
           <!-- shopping list item delete button -->
@@ -181,7 +192,7 @@
 
       <!-- list of shopping lists -->
       <md-list v-if="mode == 'showlist'">
-        <md-card v-for="list in sortedShoppingLists" :key="list._id" :data-id="list._id">     
+        <md-card v-for="list in sortedShoppingLists" :key="list._id" :data-id="list._id" :style="{ backgroundColor: list.colour }">
           <md-card-header>
             <!-- shopping list title -->
             <div class="md-title" v-bind:class="{ cardchecked: list.checked}">{{ list.title }}</div>
