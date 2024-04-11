@@ -142,7 +142,13 @@
           <md-input-container v-if="singleList.place.license">
             <label>Licence</label>
             <md-input readonly v-model="singleList.place.license"></md-input>
+            <md-button class="md-raised" v-bind:disabled="singleList.place.title.length==0" v-on:click="displayMap">Show Map</md-button> 
           </md-input-container>  
+
+          <!-- shopping place map -->
+          <div id="map-container" v-show="singleList.place.lat && singleList.place.lon" style="width: 100%; height: 400px;">
+            <div id="map" style="width: 100%; height: 100%;"></div>
+          </div>
           
         </md-card-content>
       </md-card> <!-- add new shopping list form -->
@@ -322,6 +328,10 @@
 
   <!-- our code -->
   <script src="shoppinglist.js"></script>
+
+  <!-- map display Leaflet-->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+  <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
 
   </body>
 </html>
