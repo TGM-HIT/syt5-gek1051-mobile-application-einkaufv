@@ -6,6 +6,7 @@ var db = new PouchDB('shopping');
 const sampleShoppingList = {
 	"_id": "",
 	"type": "list",
+	"responsibleUserId": null, 
 	"version": 1,
 	"title": "",
 	"checked": false,
@@ -131,13 +132,20 @@ var app = new Vue({
 		pagetitle: 'Shopping Lists',
 		shoppingLists: [],
 		shoppingListItems: [],
+		user: {
+			firstName: '',
+			lastName: ''
+		},
+		users: [],
+		editingUserId: null,
 		singleList: null,
 		currentListId: null,
 		newItemTitle: '',
 		places: [],
 		selectedPlace: null,
 		syncURL: '',
-		syncStatus: 'notsyncing'
+		syncStatus: 'notsyncing',
+		openUserDropdown: -1
 	},
 	// computed functions return data derived from the core data.
 	// if the core data changes, then this function will be called too.
@@ -163,6 +171,13 @@ var app = new Vue({
 			}
 			return obj;
 		},
+		getUserById: function() {
+			return (userId) => {
+			  const user = this.users.find(user => user._id === userId);
+			  console.log(user);
+			  return user ? `${user.firstName} ${user.lastName}` : 'Unassigned';
+			};
+		}, 
 		/**
 		 * Calculates the shopping list but sorted into
 		 * date order		- newest first,
@@ -228,13 +243,116 @@ var app = new Vue({
 
 	},
 	methods: {
-				/**
-		 * Called when the settings button is pressed. Sets the mode
-		 * to 'settings' so the Vue displays the settings panel.
-		 */
+		/**
+ * Called when the settings button is pressed. Sets the mode
+ * to 'settings' so the Vue displays the settings panel.
+ */
 		onClickSettings: function () {
 			this.mode = 'settings';
 		},
+		onClickAddUser: function () {
+			this.mode = 'adduser';
+		},
+		updateItemUser(itemId, userId) {
+			// Finden des entsprechenden Artikels und Aktualisieren der responsibleUserId
+			let item = this.shoppingListItems.find(item => item._id === itemId);
+			if (item) {
+			  item.responsibleUserId = userId;
+			  // Aktualisieren des Artikels in der Datenbank
+			  db.put(item).then(() => {
+				console.log("Artikel aktualisiert mit verantwortlichem Benutzer: ", userId);
+			  }).catch(err => {
+				console.error("Fehler beim Aktualisieren des Artikels: ", err);
+			  });
+			}
+		  },
+		  getUserName(userId) {
+			const user = this.users.find(user => user._id === userId);
+			return user ? `${user.firstName} ${user.lastName}` : 'Unassigned';
+		  },
+		onClickSaveUser: function () {
+			var userDoc = {
+				_id: 'user:' + cuid(),
+				type: 'user',
+				firstName: this.user.firstName,
+				lastName: this.user.lastName,
+				createdAt: new Date().toISOString()
+			};
+			db.put(userDoc).then(() => {
+				alert('User added successfully!');
+				this.user.firstName = '';
+				this.user.lastName = '';
+				this.mode = 'showlist';
+			}).catch((err) => {
+				console.error('Error adding user:', err);
+			});
+		},
+		onClickShowUsers: function () {
+			this.mode = 'showusers';
+			this.loadUsers(); // Lädt alle Benutzer aus der Datenbank
+		},
+		loadUsers: function () {
+			var q = {
+				selector: {
+					type: 'user'
+				}
+			};
+			db.find(q).then((result) => {
+				this.users = result.docs;
+			});
+		},
+		onClickDeleteUser: function (userId) {
+			// Zuerst das Dokument (Benutzer) abrufen, um die aktuelle Revision zu erhalten
+			db.get(userId).then((doc) => {
+				// Dokument mit seiner _id und _rev löschen
+				return db.remove(doc._id, doc._rev);
+			}).then(() => {
+				// Erfolgsmeldung anzeigen
+				alert('User successfully deleted');
+				// Benutzerliste aktualisieren, um die Änderung widerzuspiegeln
+				this.loadUsers();
+			}).catch((err) => {
+				// Fehlermeldung anzeigen
+				console.error('Error deleting user:', err);
+			});
+		},
+		onClickEditUser: function (userId) {
+			// Stellen Sie sicher, dass dies korrekt auf das Benutzerdokument zeigt
+			db.get(userId).then((doc) => {
+			  this.user = {
+				_id: doc._id,
+				_rev: doc._rev,
+				firstName: doc.firstName,
+				lastName: doc.lastName
+			  };
+			  this.mode = 'edituser';
+			}).catch((err) => {
+			  console.error('Error fetching user for edit:', err);
+			});
+		  },
+		  onClickUpdateUser: function () {
+			// Aktualisierung des Benutzers
+			this.user['type'] = 'user';
+			db.put(this.user).then(() => {
+			  this.mode = 'showlist';
+			  this.editingUserId = null; // Bearbeitungs-ID zurücksetzen
+			  this.loadUsers(); // Liste neu laden
+			  alert('User updated successfully!');
+			}).catch((err) => {
+			  console.error('Error updating user:', err);
+			});
+		  },
+		  
+		  resetEdit: function () {
+			this.editingUserId = null;
+			this.user.firstName = '';
+			this.user.lastName = '';
+		  },
+		  
+		  resetUserForm: function() {
+			this.user = { firstName: '', lastName: '' };
+			this.editingUser = false;
+		  },
 		/**
 		 * Called when the about button is pressed. Sets the mode
 		 * to 'about' so the Vue displays the about panel.
@@ -424,6 +542,9 @@ var app = new Vue({
 
 			// add timestamps
 			this.singleList.updatedAt = new Date().toISOString();
+
+			// Speichern der Benutzer-ID
+ 			this.singleList.responsibleUserId = this.singleList.responsibleUserId;
 
 			// add to on-screen list, if it's not there already
 			if (typeof this.singleList._rev === 'undefined') {
