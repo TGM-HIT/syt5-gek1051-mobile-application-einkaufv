@@ -9,6 +9,7 @@ const sampleShoppingList = {
   "version": 1,
   "title": "",
   "checked": false,
+  "quantity": 1,
   "place": {
     "title": "",
     "license": null,
@@ -533,16 +534,19 @@ var app = new Vue({
      */
     onAddListItem: function() {
       if (!this.newItemTitle) return;
+      if (!this.newItemQuantity || this.newItemQuantity < 1) this.newItemQuantity = 1;
       var obj = JSON.parse(JSON.stringify(sampleListItem));
       obj._id = 'item:' + cuid();
       obj.title = this.newItemTitle;
       obj.list = this.currentListId;
+      obj.quantity = this.newItemQuantity;
       obj.createdAt = new Date().toISOString();
       obj.updatedAt = new Date().toISOString();
       db.put(obj).then( (data) => {
         obj._rev = data.rev;
         this.shoppingListItems.unshift(obj);
         this.newItemTitle = '';
+        this.newItemQuantity = 1;
       });
     },
 
