@@ -19,7 +19,6 @@ Repository klonen:
 
 ```sh
 $ git clone https://github.com/TGM-HIT/syt5-gek1051-mobile-application-einkaufv.git
-cd app
 ```
 
 Installieren der Dependencies (Hinweis, dies wird über 100 Warnungen aufgrund von Sicherheitslücken ausgeben, da die Dependencies nicht aktuell sind; siehe auch [Fazit](#fazit)):
@@ -28,19 +27,10 @@ Installieren der Dependencies (Hinweis, dies wird über 100 Warnungen aufgrund v
 $ npm install
 ```
 
-Optional: wenn ihr die lokale Applikation mit der CouchDB-Instanz synchronisieren wollt, dann müsst ihr eine `.env`-Datei im `app`-Ordner erstellen und dort die folgenden Umgebungsvariablen setzen:
-
-```sh
-COUCHDB_URL=...
-```
-
-Hier statt `...` die URL zur CouchDB-Instanz eintragen.
-
 Starten als lokale Applikation:
 
 ```sh
-$ npm start                 # ohne Online-Synchronisierung
-$ npm start --env-file=.env  # mit Online-Synchronisierung
+$ npm start
 ```
 
 ### Branches
@@ -66,7 +56,13 @@ Als Referenz können auch die bisherigen Commits herangezogen werden.
 
 ## Verwendung des Testframeworks
 
-In `test/test.js` können beliebige Test-Cases hinzugefügt werden, hier ist ein Beispiel:
+Zuerst müssen die "devDependencies", die im package.json enthalten sind, installiert werden:
+\begin{verbatim}
+    cd syt5-gek1051-mobile-application-einkaufv\app
+    npm install
+\end{verbatim}
+
+In `test/test.js` können beliebige Test-Cases hinzugefügt werden, hier ist ein Beispiel [2]:
 
 ```js
 // Code in main.js
@@ -92,4 +88,5 @@ Mittels des Befehls `npm run test` werden die Tests lokal durchgeführt.
 
 ## Quellen
 
-[1] “Gitcommitmessages,” OpenStack, https://wiki.openstack.org/wiki/GitCommitMessages#Examples_of_good_practice (accessed Mar. 1, 2024).
+- [1] „GitCommitMessages - OpenStack“. OpenStack. [Online](https://wiki.openstack.org/wiki/GitCommitMessages#Examples_of_good_practice) (accessed: Mar. 01, 2024)
+- [2] "Test JavaScript code using Karma, Mocha, Chai and headless browsers". Meziantou's blog. [Online](https://www.meziantou.net/test-javascript-code-using-karma-mocha-chai-and-headless-browsers.htm) (accessed: Mar. 21, 2024)
