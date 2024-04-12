@@ -1,4 +1,3 @@
-
 // this will be the PouchDB database
 var db = new PouchDB('shopping');
 
@@ -611,11 +610,27 @@ var app = new Vue({
      * Vue array.
      * @param {String} id
      */
-     onDeleteItem: function(id) {
-       var match = this.findDoc(this.shoppingListItems, id);
-       db.remove(match.doc).then((data) => {
-         this.shoppingListItems.splice(match.i, 1);
-       });
-     }
+    onDeleteItem: function(id) {
+      var match = this.findDoc(this.shoppingListItems, id);
+      db.remove(match.doc).then((data) => {
+        this.shoppingListItems.splice(match.i, 1);
+      });
+    },
+
+    moveUp: function(index) {
+			if (index > 0) {
+				var itemToMove = this.shoppingLists[index];
+				this.shoppingLists.splice(index, 1); // remove the item
+				this.shoppingLists.splice(index - 1, 0, itemToMove); // insert it one position up
+			}
+		},
+
+		moveDown: function(index) {
+			if (index < this.shoppingLists.length - 1) {
+				var itemToMove = this.shoppingLists[index];
+				this.shoppingLists.splice(index, 1); // remove the item
+				this.shoppingLists.splice(index + 1, 0, itemToMove); // insert it one position down
+			}
+    },
   }
 })

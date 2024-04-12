@@ -198,7 +198,7 @@
 
       <!-- list of shopping lists -->
       <md-list v-if="mode == 'showlist'">
-        <md-card v-for="list in sortedShoppingLists" :key="list._id" :data-id="list._id" :style="{ backgroundColor: list.colour }">
+        <md-card v-for="(list, index) in shoppingLists" :key="list._id" :data-id="list._id" :style="{ backgroundColor: list.colour }">
           <md-card-header>
             <!-- shopping list title -->
             <div class="md-title" v-bind:class="{ cardchecked: list.checked}">{{ list.title }}</div>
@@ -241,6 +241,17 @@
             <!-- button to edit the list items -->
             <md-button v-on:click="onClickList(list._id, list.title)">
                 <md-icon>chevron_right</md-icon>
+            </md-button>
+          </md-card-actions>
+
+          <md-card-actions>
+            <md-button v-on:click="moveUp(index)">
+              Up
+            </md-button>
+          </md-card-actions>
+          <md-card-actions>
+            <md-button v-on:click="moveDown(index)">
+              Down
             </md-button>
           </md-card-actions>
         </md-card>
