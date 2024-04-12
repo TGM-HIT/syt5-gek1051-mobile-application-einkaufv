@@ -1,3 +1,4 @@
+
 // this will be the PouchDB database
 var db = new PouchDB('shopping');
 
@@ -8,7 +9,8 @@ const sampleShoppingList = {
   "version": 1,
   "title": "",
   "checked": false,
-  "quantity": 1,
+  "icon": "",
+  "category": "",
   "place": {
     "title": "",
     "license": null,
@@ -106,7 +108,8 @@ var app = new Vue({
     places: [],
     selectedPlace: null,
     syncURL: '',
-    syncStatus: 'notsyncing'
+    syncStatus: 'notsyncing',
+    currentCategory: '',
   },
   // computed functions return data derived from the core data.
   // if the core data changes, then this function will be called too.
@@ -158,13 +161,13 @@ var app = new Vue({
 
     // create database index on 'type'
     db.createIndex({ index: { fields: ['type'] }}).then(() => {
-      
       // load all 'list' items 
       var q = {
         selector: {
           type: 'list'
         }
       };
+      
       return db.find(q);
     }).then((data) => {
 
@@ -195,9 +198,28 @@ var app = new Vue({
       this.syncURL = data.syncURL;
       this.startSync();
     }).catch((e) => {})
-
   },
   methods: {
+    getSortedShoppingLists: function() {
+      if (this.currentCategory && this.currentCategory !== 'Alle Kategorien') {
+        return this.shoppingLists
+          .filter(list => list.category === this.currentCategory)
+          .sort(newestFirst);
+      }
+      return this.shoppingLists.sort(newestFirst);
+    },
+    
+    setCurrentCategory: function(category) {
+      this.currentCategory = category;
+    },
+    sortedShoppingLists: function() {
+      if (this.currentCategory) {
+        return this.shoppingLists
+          .filter(list => list.category === this.currentCategory)
+          .sort(newestFirst);
+      }
+      return this.shoppingLists.sort(newestFirst);
+    },
     /**
      * Called when the settings button is pressed. Sets the mode
      * to 'settings' so the Vue displays the settings panel.
@@ -278,20 +300,6 @@ var app = new Vue({
 
             // locate the doc in our existing arrays
             var match = this.findDoc(arr, change._id);
-
-            // fetch eventual conflicts
-            db.get(change._id, { conflicts: true }).then((data) => {
-              console.log('Conflicts:');
-              console.log(data);
-
-              // print losing revisions
-              for (var rev in data._conflicts) {
-                db.get(change._id, { rev: data._conflicts[rev] }).then((res) => {
-                  console.log('Losing revision:');
-                  console.log(res);
-                });
-              }
-            });
 
             // if we have it already 
             if (match.doc) {
@@ -493,22 +501,27 @@ var app = new Vue({
      * Updates the Vue model with the all items in the database
      */
     reloadLists: function() {
-      // Fetch lists
+      // Hole alle Listen
       db.find({
-        selector: { 
-          type: 'list' 
-        }
+        selector: { type: 'list' }
       }).then((data) => {
-        this.shoppingLists = data.docs;
-        // Fetch list items
-        return db.find({ 
-          selector: { 
-            type: 'item' 
-          } 
-        });
+        if (this.currentCategory && this.currentCategory !== 'Alle Kategorien') {
+          // Wenn eine bestimmte Kategorie ausgewählt ist, filtere die Listen
+          this.shoppingLists = data.docs.filter(list => list.category === this.currentCategory);
+        } else {
+          // Wenn keine Kategorie ausgewählt ist oder "Alle Kategorien" ausgewählt ist,
+          // zeige alle Listen an
+          this.shoppingLists = data.docs;
+        }
+        // Sortiere die Listen
+        this.shoppingLists.sort(newestFirst);
+        // Hole die Listenelemente
+        return db.find({ selector: { type: 'item' } });
       }).then((data) => {
         this.shoppingListItems = data.docs;
-      }).catch((e) => {})
+      }).catch((e) => {
+        console.error('Fehler beim Laden der Listen: ', e);
+      });
     },
     
     // the user wants to see the contents of a shopping list
@@ -533,19 +546,16 @@ var app = new Vue({
      */
     onAddListItem: function() {
       if (!this.newItemTitle) return;
-      if (!this.newItemQuantity || this.newItemQuantity < 1) this.newItemQuantity = 1;
       var obj = JSON.parse(JSON.stringify(sampleListItem));
       obj._id = 'item:' + cuid();
       obj.title = this.newItemTitle;
       obj.list = this.currentListId;
-      obj.quantity = this.newItemQuantity;
       obj.createdAt = new Date().toISOString();
       obj.updatedAt = new Date().toISOString();
       db.put(obj).then( (data) => {
         obj._rev = data.rev;
         this.shoppingListItems.unshift(obj);
         this.newItemTitle = '';
-        this.newItemQuantity = 1;
       });
     },
 
@@ -610,27 +620,11 @@ var app = new Vue({
      * Vue array.
      * @param {String} id
      */
-    onDeleteItem: function(id) {
-      var match = this.findDoc(this.shoppingListItems, id);
-      db.remove(match.doc).then((data) => {
-        this.shoppingListItems.splice(match.i, 1);
-      });
-    },
-
-    moveUp: function(index) {
-			if (index > 0) {
-				var itemToMove = this.shoppingLists[index];
-				this.shoppingLists.splice(index, 1); // remove the item
-				this.shoppingLists.splice(index - 1, 0, itemToMove); // insert it one position up
-			}
-		},
-
-		moveDown: function(index) {
-			if (index < this.shoppingLists.length - 1) {
-				var itemToMove = this.shoppingLists[index];
-				this.shoppingLists.splice(index, 1); // remove the item
-				this.shoppingLists.splice(index + 1, 0, itemToMove); // insert it one position down
-			}
-    },
+     onDeleteItem: function(id) {
+       var match = this.findDoc(this.shoppingListItems, id);
+       db.remove(match.doc).then((data) => {
+         this.shoppingListItems.splice(match.i, 1);
+       });
+     }
   }
 })

@@ -58,6 +58,16 @@
         <md-button class="md-icon-button" v-if="mode == 'showlist'" v-on:click="onClickAbout">
           <md-icon>info_outline</md-icon>
         </md-button>
+        <div class="category-filter">
+          <md-select v-model="currentCategory" class="category-selector" @change="reloadLists">
+            <md-option value="Alle Kategorien">Alle Kategorien</md-option>
+            <md-option value="Lebensmittel">Lebensmittel</md-option>
+            <md-option value="Haushalt">Haushalt</md-option>
+            <md-option value="Elektronik">Elektronik</md-option>
+            <md-option value="Kleidung">Kleidung</md-option>
+            <!-- Weitere Kategorien nach Bedarf -->
+          </md-select>
+        </div>
 
       </md-toolbar>
     </md-whiteframe> <!-- top bar -->
@@ -66,21 +76,36 @@
     <main class="main-content">
 
       <!-- add new shopping list form-->
-      <md-card v-if="mode == 'addlist'" :style="{ backgroundColor: mode == 'addlist' ? 'white' : '' }">
+      <md-card v-if="mode == 'addlist'">
         <md-card-header>Add Shopping List</md-card-header>
         <md-card-content>
           <!-- shopping list name -->
           <md-input-container>
             <label>List name</label>
             <md-input placeholder="e.g. Food" v-model="singleList.title"></md-input>
-          </md-input-container>   
-          
-          <!-- select list colour -->
-          <label>List colour</label>
-          <md-input-container>
-            <input type="color" v-model="singleList.colour">
           </md-input-container>
-
+          <md-input-container>
+            <label>Icon wählen</label>
+            <md-select v-model="singleList.icon">
+              <md-option value="restaurant">Essen</md-option>
+              <md-option value="local_bar">Getränke</md-option>
+              <md-option value="checkroom">Kleidung</md-option>
+              <md-option value="spa">Kosmetik</md-option>
+            </md-select>
+          </md-input-container>
+          <!-- add kategorie -->
+          <md-input-container>
+            <label>Kategorie wählen</label>
+            <md-select v-model="singleList.category">
+              <md-option value="Lebensmittel">Lebensmittel</md-option>
+              <md-option value="Haushalt">Haushalt</md-option>
+              <md-option value="Elektronik">Elektronik</md-option>
+              <md-option value="Kleidung">Kleidung</md-option>
+              <!-- Weitere Kategorien nach Bedarf hinzufügen -->
+            </md-select>
+          </md-input-container>
+          
+          
           <!-- shopping place name -->
           <md-input-container>
             <label>Place name</label>
@@ -142,13 +167,7 @@
           <md-input-container v-if="singleList.place.license">
             <label>Licence</label>
             <md-input readonly v-model="singleList.place.license"></md-input>
-            <md-button class="md-raised" v-bind:disabled="singleList.place.title.length==0" v-on:click="displayMap">Show Map</md-button> 
           </md-input-container>  
-
-          <!-- shopping place map -->
-          <div id="map-container" v-show="singleList.place.lat && singleList.place.lon" style="width: 100%; height: 400px;">
-            <div id="map" style="width: 100%; height: 100%;"></div>
-          </div>
           
         </md-card-content>
       </md-card> <!-- add new shopping list form -->
@@ -161,11 +180,6 @@
           <!-- shopping item title -->
           <md-input-container>
             <md-input v-model="newItemTitle" placeholder="New item e.g. eggs" @keyup.enter.native="onAddListItem"></md-input>
-          </md-input-container>
-
-          <!-- shopping item quantity -->
-          <md-input-container>
-            <md-input type="number" v-model="newItemQuantity" placeholder="Quantity (1 or higher)" min="1"></md-input>
           </md-input-container>
 
           <!-- shopping item add button -->
@@ -182,9 +196,9 @@
             <md-checkbox v-model="item.checked" class="md-primary" v-on:change="onCheckListItem(item._id)"></md-checkbox>
           </div>
 
-          <!-- item title and quantity -->
+          <!-- shopping list item title -->
           <div class="md-list-text-container">
-            <span v-bind:class="{ cardchecked: item.checked }">{{ item.title }} - Quantity: {{ item.quantity }}</span>
+            <span v-bind:class="{ cardchecked: item.checked}">{{ item.title }}</span>
           </div>
 
           <!-- shopping list item delete button -->
@@ -196,14 +210,17 @@
         </md-list-item>
       </md-list> <!-- shopping list item editor -->
 
+      
+
       <!-- list of shopping lists -->
       <md-list v-if="mode == 'showlist'">
-        <md-card v-for="(list, index) in shoppingLists" :key="list._id" :data-id="list._id" :style="{ backgroundColor: list.colour }">
+        <md-card v-for="list in getSortedShoppingLists()" :key="list._id" :data-id="list._id">     
           <md-card-header>
             <!-- shopping list title -->
-            <div class="md-title" v-bind:class="{ cardchecked: list.checked}">{{ list.title }}</div>
-
-            <!-- shopping place title -->
+              <span>
+                <div class="md-title" v-bind:class="{ cardchecked: list.checked}"><md-icon>{{ list.icon }}</md-icon>-{{ list.title }}</div>
+              </span>         
+            <!-- shopping place title --> 
             <div class="md-subhead">{{ list.place.title }}</div>
 
             <!-- 'speed dial' buttons -->
@@ -241,17 +258,6 @@
             <!-- button to edit the list items -->
             <md-button v-on:click="onClickList(list._id, list.title)">
                 <md-icon>chevron_right</md-icon>
-            </md-button>
-          </md-card-actions>
-
-          <md-card-actions>
-            <md-button v-on:click="moveUp(index)">
-              Up
-            </md-button>
-          </md-card-actions>
-          <md-card-actions>
-            <md-button v-on:click="moveDown(index)">
-              Down
             </md-button>
           </md-card-actions>
         </md-card>
@@ -339,10 +345,6 @@
 
   <!-- our code -->
   <script src="shoppinglist.js"></script>
-
-  <!-- map display Leaflet-->
-  <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
-  <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
 
   </body>
 </html>
